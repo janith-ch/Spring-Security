@@ -17,27 +17,23 @@ public class StudentManagementController {
             new Student(03, "shane"));
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_ADMINTRAINEE')")
     public List<Student> getAllStudent() {
         return STUDENTS;
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('student:write')")
     public void registerStudent(@RequestBody Student student) {
         System.out.println("student registered");
         System.out.println(student);
     }
 
     @DeleteMapping(path = "{studentId}")
-    @PreAuthorize("hasAnyAuthority('student:write')")
     public void deleteStudent(@PathVariable Integer studentId) {
         System.out.println("student deleted");
         System.out.println(studentId);
     }
 
     @PutMapping(path = "{studentId}")
-    @PreAuthorize("hasAnyAuthority('student:write')")
     public void updateStudent(@PathVariable Integer studentId, @RequestBody Student student) {
         System.out.println("student updated");
         System.out.println(String.format("%s %s ", student, studentId));
